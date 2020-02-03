@@ -1,11 +1,21 @@
 var start = document.getElementById("startButton").addEventListener("click", function() {
-    event.preventDefault;
+    event.preventDefault();
     startQuiz();
 })
-
-var continueQuiz = document.addEventListener("click", function() {
-    changeQuizQuestion();
-    questionCounter++;
+//this is the default click listener that listens to any click besides start
+    document.addEventListener("click", function(event) {
+    event.preventDefault();
+    var element = event.target;
+    if (element.classList.contains("continueButton"))
+    {
+        questionCounter++;
+        changeQuizQuestion();
+        alert(selectedAnswer);
+}
+    if (element.classList.contains("q1")) {selectedAnswer = 1;}
+    if (element.classList.contains("q2")) {selectedAnswer = 2;}
+    if (element.classList.contains("q3")) {selectedAnswer = 3;}
+    if (element.classList.contains("q4")) {selectedAnswer = 4;}
 })
 
 //global access elements and  variables
@@ -13,25 +23,27 @@ var q1 = document.createElement("button");
 var q2 = document.createElement("button");
 var q3 = document.createElement("button");
 var q4 = document.createElement("button");
-q1.classList.add("quizBut", "btn");
-q2.classList.add("quizBut", "btn");
-q3.classList.add("quizBut", "btn");
-q4.classList.add("quizBut", "btn");
+q1.classList.add("quizBut", "btn", "q1");
+q2.classList.add("quizBut", "btn", "q2");
+q3.classList.add("quizBut", "btn", "q3");
+q4.classList.add("quizBut", "btn", "q4");
 var contButton = document.createElement("Button");
 var questionCounter = 0;
+var selectedAnswer = null;
+var totalScore = 0;
 
 //array of questions/answers/choices to use
 var questionsArray = [
     {
-    question: "insert q1 here",
-    choices: ["choice1", "choice2", "choice3", "choice4"],
-    answer: 2
+    question: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: 3
 },
 
 {
-    question: "insert q2 here",
-    choices: ["c1","c2","c3","c4"],
-    answer: 2
+    question: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: 3
 },
 
 {

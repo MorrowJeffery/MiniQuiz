@@ -1,6 +1,7 @@
 var start = document.getElementById("startButton").addEventListener("click", function() {
     event.preventDefault();
     startQuiz();
+    timerCTR = setInterval(countdown(), 1000);
 })
 //this is the default click listener that listens to any click besides start
     document.addEventListener("click", function(event) {
@@ -8,9 +9,12 @@ var start = document.getElementById("startButton").addEventListener("click", fun
     var element = event.target;
     if (element.classList.contains("continueButton"))
     {
-        questionCounter++;
-        changeQuizQuestion();
-        alert(selectedAnswer);
+        
+        if (selectedAnswer == "1" || selectedAnswer == "2" || selectedAnswer == "3" || selectedAnswer == "4") {
+            questionCounter++;
+            changeQuizQuestion();
+        }
+        else if (selectedAnswer == "0") {alert("Must Select An Answer");}
 }
     if (element.classList.contains("q1")) {selectedAnswer = 1;}
     if (element.classList.contains("q2")) {selectedAnswer = 2;}
@@ -29,8 +33,10 @@ q3.classList.add("quizBut", "btn", "q3");
 q4.classList.add("quizBut", "btn", "q4");
 var contButton = document.createElement("Button");
 var questionCounter = 0;
-var selectedAnswer = null;
+var selectedAnswer = 0;
 var totalScore = 0;
+var timer = 30;
+var timerh1 = document.getElementById("timer");
 
 //array of questions/answers/choices to use
 var questionsArray = [
@@ -70,6 +76,8 @@ function startQuiz() {
     jumbo1.classList.add("container");
     contButton.value = 0;
     changeQuizQuestion();
+    totalScore = 0;
+    timerh1.innerHTML = timer;
 }
 
 //this changes the quiz question
@@ -81,4 +89,9 @@ function changeQuizQuestion() {
     q3.innerHTML = questionsArray[questionCounter].choices[2];
     q4.innerHTML = questionsArray[questionCounter].choices[3];
     contButton.value = (contButton.value + 1);
+}
+
+function countdown() {
+    timer--;
+    timerh1.innerHTML = timer;
 }

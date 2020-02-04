@@ -51,6 +51,7 @@ var start = document.getElementById("startButton").addEventListener("click", fun
                         initialsTB.setAttribute("type", "text");
                         var bothr = document.querySelector("#bottomHR");
                         jumbo1.insertBefore(initialsTB, bothr);
+                        jp1.innerHTML = "Insert Initals Below";
                     }
                     else {
                         changeQuizQuestion();
